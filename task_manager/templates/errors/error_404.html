@@ -1,0 +1,17 @@
+{% extends '../layout/base.html' %}
+
+{% block title %}
+    {{basic.app_title}}
+{% endblock %}
+
+{% block content %}
+<h1 class="sr-only">{{texts.app_title}}</h1>
+<div class="card my-4">
+  <div class="card-body p-5 bg-light">
+    <div class="display-4">{{errors.not_found}}</div>
+    <p class="lead">{{errors.very_complicate}}</p>
+    <hr>
+    <a class="btn btn-primary btn-lg" href="{% url 'home' %}">{{errors.return_on_index}}</a>
+  </div>
+</div>
+{% endblock %}

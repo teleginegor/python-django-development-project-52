@@ -1,0 +1,60 @@
+{% extends 'layout/base.html' %}
+
+{% load django_bootstrap5 %}
+
+{% block title %}
+  {{basic.app_title}}
+{% endblock %}
+
+{% block content %}
+<h1 class="my-4">{{texts.task_detail_title}}</h1>    
+<div class="card">
+  <div class="card-header bg-secondary text-white">
+    <h2>{{task.name}}</h2>
+  </div>
+  <div class="card-body bg-light">
+    <p>{{task.description}}</p>
+    <hr>
+    <div class="container">
+      <div class="row p-1">
+        <div class="col">{{texts.task_author}}</div>
+        <div class="col">{{task.author}}</div>
+      </div>
+      <div class="row p-1">
+        <div class="col">{{texts.task_executor}}</div>
+          <div class="col">{{task.executor}}</div>
+        </div>
+        <div class="row p-1">
+          <div class="col">{{texts.task_status}}</div>
+          <div class="col">{{task.status}}</div>
+        </div>
+        <div class="row p-1">
+          <div class="col">{{texts.task_date}}</div>
+          <div class="col">{{task.created_at|date:"d.m.Y H:i"}}</div>
+        </div>
+        <div class="row p-1">
+          <div class="col">
+            <h6>{{texts.task_labels}}:</h6>
+            <ul>
+              {% for label in task.labels.all %}  
+                <li>{{label.name}}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        <div class="row p-1">
+          <div class="col d-flex flex-column">
+            <a 
+              href="{% url 'tasks'%}" 
+              class="d-inline-block mb-3 link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+            >
+              {{texts.task_detail_cancel}}
+            </a>
+            <a href="{% url 'task_update' task.id %}" class="d-inline-block">{{texts.task_update}}</a>
+            <a href="{% url 'task_delete' task.id %}" class="d-inline-block">{{texts.task_delete}}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock content %}

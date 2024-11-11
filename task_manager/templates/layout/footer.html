@@ -1,0 +1,16 @@
+<div class="container my-5 pt-4 border-top text-center">
+  <a target="_blank" href="https://ru.hexlet.io">{{basic.hexlet}}</a>
+</div>
+
+<div class="container d-flex justify-content-center mb-3">
+  <form action="{% url 'set_language' 'en' %}" method="post" class="me-3">
+    {% csrf_token %}
+    <button class="btn btn-primary" type="submit">Eng</button>
+  </form>
+  <form action="{% url 'set_language' 'ru' %}" method="post">
+    {% csrf_token %}
+    <button class="btn btn-primary" type="submit">Рус</button>
+  </form>
+</div>
+
+

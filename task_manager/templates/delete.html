@@ -1,0 +1,23 @@
+{% extends 'layout/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block title %}
+    {{basic.app_title}}
+{% endblock %}
+
+{% block content %}
+<h1 class="my-4">{{title}}</h1>
+<form method="post">
+  {% csrf_token %}
+  <p>{{delete_sure}} {{delete_obj}}?</p>
+  <a 
+    href="{{dest_url}}" 
+    class="d-inline-block mb-3 link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+  >
+    {{delete_cancel}}
+  </a>
+  <br>
+  {% bootstrap_button button_text button_type="submit" button_class="btn btn-danger" %}
+  </div>
+</form>
+{% endblock %}

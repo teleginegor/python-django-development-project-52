@@ -1,0 +1,51 @@
+{% extends 'layout/base.html' %}
+
+{% load django_bootstrap5 %}
+
+{% block title %}
+  {{basic.app_title}}
+{% endblock %}
+
+{% block content %}
+  <h1 class="my-4">{{texts.tasks_title}}</h1>
+  <a class="btn btn-primary mb-3" href="{% url 'task_create' %}">{{texts.task_create}}</a>
+  <div class="card mb-3">
+    <div class="card-body bg-light">
+        <form class="form-inline center" method="get">
+          {% bootstrap_form filter.form field_class="ml-2 mr-3" %}
+          {% bootstrap_button button_text button_type="submit" button_class="btn btn-primary" %}
+        </form>
+    </div>
+</div>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>{{texts.task_id}}</th>
+        <th>{{texts.task_name}}</th>
+        <th>{{texts.task_status}}</th>
+        <th>{{texts.task_author}}</th>
+        <th>{{texts.task_executor}}</th>
+        <th>{{texts.task_date}}</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for task in tasks %}
+      <tr>
+        <td>{{task.id}}</td>
+        <td><a href="{% url 'task_detail' task.id %}">{{task.name}}</a></td>
+        <td>{{task.status}}</td>
+        <td>{{task.author}}</td>
+        <td>{{task.executor}}</td>
+        <td>{{task.created_at|date:"d.m.Y H:i"}}</td>
+        <td class="d-flex flex-column">
+          <a href="{% url 'task_update' task.id %}" class="d-inline-block">{{texts.task_update}}</a>
+          <a href="{% url 'task_delete' task.id %}" class="d-inline-block">{{texts.task_delete}}</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

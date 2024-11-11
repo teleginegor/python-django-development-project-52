@@ -1,0 +1,37 @@
+{% extends 'layout/base.html' %}
+
+{% load django_bootstrap5 %}
+
+{% block title %}
+  {{basic.app_title}}
+{% endblock %}
+
+{% block content %}
+  <h1 class="my-4">{{list.list_title}}</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>{{list.id}}</th>
+        <th>{{list.user_name}}</th>
+        <th>{{list.full_name}}</th>
+        <th>{{list.date_joined}}</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{user.id}}</td>
+        <td>{{user.username}}</td>
+        <td>{{user.get_full_name}}</td>
+        <td>{{user.date_joined|date:"d.m.Y H:i"}}</td>
+        <td class="d-flex flex-column">
+          <a href="{% url 'user_update' user.id %}" class="d-inline-block">{{list.update}}</a>
+          <a href="{% url 'user_delete' user.id %}" class="d-inline-block">{{list.delete}}</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}

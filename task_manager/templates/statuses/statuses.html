@@ -1,0 +1,36 @@
+{% extends 'layout/base.html' %}
+
+{% load django_bootstrap5 %}
+
+{% block title %}
+  {{basic.app_title}}
+{% endblock %}
+
+{% block content %}
+  <h1 class="my-4">{{texts.status_title}}</h1>
+  <a class="btn btn-primary mb-3" href="{% url 'create_status' %}">{{texts.status_create}}</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>{{texts.status_id}}</th>
+        <th>{{texts.status_name}}</th>
+        <th>{{texts.status_date}}</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for status in statuses %}
+      <tr>
+        <td>{{status.id}}</td>
+        <td>{{status.name}}</td>
+        <td>{{status.created_at|date:"d.m.Y H:i"}}</td>
+        <td class="d-flex flex-column">
+          <a href="{% url 'update_status' status.id %}" class="d-inline-block">{{texts.status_update}}</a>
+          <a href="{% url 'delete_status' status.id %}" class="d-inline-block">{{texts.status_delete}}</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock content %}
